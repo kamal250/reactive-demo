@@ -57,22 +57,24 @@ export default function Home() {
               </tr>
             </thead>
             <tbody>
-              {listData.map((listRecord, index) => {
-                return (
-                  <tr
-                    key={index}
-                    className={`text-xs border-b border-gray-100 ${
-                      listRecord.highlight ? "bg-blue-50" : ""
-                    } `}
-                  >
-                    <td className={`py-6 pl-6 bg-blue-100`}>
-                      {listRecord.name}
-                    </td>
-                    <td className={`pl-6`}>{listRecord.position}</td>
-                    <td>{listRecord.office}</td>
-                  </tr>
-                );
-              })}
+              {listData
+                .sort((a, b) => Number(b.highlight) - Number(a.highlight))
+                .map((listRecord, index) => {
+                  return (
+                    <tr
+                      key={index}
+                      className={`text-xs border-b border-gray-100 ${
+                        listRecord.highlight ? "bg-blue-50" : ""
+                      } `}
+                    >
+                      <td className={`py-6 pl-6 bg-blue-100`}>
+                        {listRecord.name}
+                      </td>
+                      <td className={`pl-6`}>{listRecord.position}</td>
+                      <td>{listRecord.office}</td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </section>

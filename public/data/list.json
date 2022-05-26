@@ -11,14 +11,14 @@
     "name": "Cedric Kelly",
     "position": "Javascript Developer",
     "office": "Edinburgh",
-    "highlight": true
+    "highlight": false
   },
   {
     "id": 3,
     "name": "Garrett Winters",
     "position": "Director",
     "office": "San Francisco",
-    "highlight": false
+    "highlight": true
   },
   {
     "id": 4,
