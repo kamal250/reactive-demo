@@ -1,9 +1,32 @@
+import { useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import listData from "../public/data/list.json";
+import io from "socket.io-client";
+let socket;
 
 export default function Home() {
+  useEffect(() => {
+    socketInitializer();
+    return () => {
+      console.log("This will be logged on unmount");
+    };
+  });
+
+  const socketInitializer = async () => {
+    await fetch("/api/initialize-socket");
+    socket = io();
+
+    socket.on("list-update", () => {
+      console.log("list-update-event");
+    });
+  };
+
+  const publishAction = async () => {
+    socket.emit("input-change", "send-alert");
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -77,6 +100,9 @@ export default function Home() {
                 })}
             </tbody>
           </table>
+          <div className="flex items-center justify-center">
+            <button onClick={() => publishAction()}>Publish</button>
+          </div>
         </section>
       </main>
 
