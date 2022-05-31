@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Ashton Cox",
+    "position": "Technical Author",
+    "office": "San Francisco",
+    "highlight": false
+  },
+  {
+    "id": 2,
+    "name": "Cedric Kelly",
+    "position": "Javascript Developer",
+    "office": "Edinburgh",
+    "highlight": true
+  },
+  {
+    "id": 3,
+    "name": "Garrett Winters",
+    "position": "Director",
+    "office": "San Francisco",
+    "highlight": false
+  },
+  {
+    "id": 4,
+    "name": "Tiger Nixon",
+    "position": "Systen Architect",
+    "office": "San Francisco",
+    "highlight": false
+  }
+]

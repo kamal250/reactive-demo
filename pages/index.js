@@ -1,12 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import listData from "../public/data/list.json";
+import updatedListData from "../public/data/updatedList.json";
 import io from "socket.io-client";
 let socket;
 
 export default function Home() {
+  const [position, setPosition] = useState(listData);
   useEffect(() => {
     socketInitializer();
     return () => {
@@ -19,12 +21,18 @@ export default function Home() {
     socket = io();
 
     socket.on("list-update", () => {
+      //TODO :: Change listData record here dynamically
+      setPosition(JSON.parse(JSON.stringify(updatedListData)));
       console.log("list-update-event");
     });
   };
 
-  const publishAction = async () => {
+  const publishAction = () => {
     socket.emit("input-change", "send-alert");
+  };
+
+  const resetAction = () => {
+    setPosition(JSON.parse(JSON.stringify(listData)));
   };
 
   return (
@@ -80,7 +88,7 @@ export default function Home() {
               </tr>
             </thead>
             <tbody>
-              {listData
+              {position
                 .sort((a, b) => Number(b.highlight) - Number(a.highlight))
                 .map((listRecord, index) => {
                   return (
@@ -101,7 +109,18 @@ export default function Home() {
             </tbody>
           </table>
           <div className="flex items-center justify-center">
-            <button onClick={() => publishAction()}>Publish</button>
+            <button
+              className={`bg-green-100 mt-5 mr-5`}
+              onClick={() => publishAction()}
+            >
+              Publish
+            </button>
+            <button
+              className={`bg-indigo-100 mt-5`}
+              onClick={() => resetAction()}
+            >
+              Reset
+            </button>
           </div>
         </section>
       </main>
